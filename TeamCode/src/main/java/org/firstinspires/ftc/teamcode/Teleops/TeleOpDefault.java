@@ -4,8 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.mechanisms.MechanumDrive;
 
-@TeleOp(name="TeleOp1", group="Linear OpMode")
-public class TeleOp1 extends LinearOpMode {
+@TeleOp(name="TeleOpDefault", group="Linear OpMode")
+public class TeleOpDefault extends LinearOpMode {
 
     MechanumDrive drivetrain = new MechanumDrive();
 
