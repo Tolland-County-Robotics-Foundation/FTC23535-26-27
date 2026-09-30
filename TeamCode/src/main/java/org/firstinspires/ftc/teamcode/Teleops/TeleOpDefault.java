@@ -2,12 +2,13 @@ package org.firstinspires.ftc.teamcode.Teleops;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import org.firstinspires.ftc.teamcode.mechanisms.MechanumDrive;
+
+import org.firstinspires.ftc.teamcode.mechanisms.MecanumDrive;
 
 @TeleOp(name="TeleOpDefault", group="Linear OpMode")
 public class TeleOpDefault extends LinearOpMode {
 
-    MechanumDrive drivetrain = new MechanumDrive();
+    MecanumDrive drivetrain = new MecanumDrive();
 
     @Override
     public void runOpMode() {
