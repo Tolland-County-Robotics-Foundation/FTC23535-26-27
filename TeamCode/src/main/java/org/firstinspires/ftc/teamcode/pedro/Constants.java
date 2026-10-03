@@ -10,7 +10,6 @@ import com.pedropathing.revhub.drivetrains.Mecanum;
 import com.pedropathing.revhub.drivetrains.MecanumConfig;
 import com.pedropathing.revhub.localizers.Encoder;
 import com.pedropathing.revhub.localizers.ThreeWheelConfig;
-import com.pedropathing.revhub.localizers.ThreeWheelIMUConfig;
 import com.pedropathing.revhub.localizers.ThreeWheelLocalizer;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -29,22 +28,22 @@ public class Constants {
 
             c.manualBrakeMode.set(true);
     });
-//ADD IN IMU STUFF, EVERYTHING ELSE GOOD
-    //public static ThreeWheelIMUConfig localizerConfig = new ThreeWheelIMUConfig(
-//c -> {
-        //c.leftEncoderName.set("lf");
-       // c.rightEncoderName.set("rr");
-       // c.strafeEncoderName.set("lr");
-       // c.leftPodY.set(2.750148391024103);
-       // c.rightPodY.set(-2.653128447895786);
-        //c.strafePodX.set(0.009182736482849);
-       // c.forwardTicksToInches.set(0.0023439394940774254);
-       // c.strafeTicksToInches.set(0.0019634242118254235);
-       // c.turnTicksToRadians.set(0.0025276493394396473);
-       // c.leftEncoderDirection.set(Encoder.REVERSE);
-        //c.rightEncoderDirection.set(Encoder.REVERSE);
-      //  c.strafeEncoderDirection.set(Encoder.FORWARD);
-    //});
+
+    public static ThreeWheelConfig localizerConfig = new ThreeWheelConfig(
+c -> {
+        c.leftEncoderName.set("lf");
+        c.rightEncoderName.set("rr");
+        c.strafeEncoderName.set("lr");
+        c.leftPodY.set(2.750148391024103);
+        c.rightPodY.set(-2.653128447895786);
+        c.strafePodX.set(0.009182736482849);
+        c.forwardTicksToInches.set(0.0023439394940774254);
+        c.strafeTicksToInches.set(0.0019634242118254235);
+        c.turnTicksToRadians.set(0.0025276493394396473);
+        c.leftEncoderDirection.set(Encoder.REVERSE);
+        c.rightEncoderDirection.set(Encoder.REVERSE);
+        c.strafeEncoderDirection.set(Encoder.FORWARD);
+    });
 
     public static ForesightConfig foresightConfig = new ForesightConfig(
             c -> {
@@ -72,13 +71,13 @@ public class Constants {
             }
     );
 
-//WHEN FINISHED DELETE COMMENT MARKS
-    //public static Follower create(HardwareMap hardwareMap) {
+
+    public static Follower create(HardwareMap hardwareMap) {
         // return new Follower(Drivetrain, Localizer, Foresight);
-        //return new Follower(
-        //        new ThreeWheelIMULocalizer(hardwareMap, localizerConfig),
-          //      new Mecanum(hardwareMap, drivetrainConfig),
-           //     new Foresight(foresightConfig)
-        //);
-    //}
+        return new Follower(
+                new ThreeWheelLocalizer(hardwareMap, localizerConfig),
+                new Mecanum(hardwareMap, drivetrainConfig),
+                new Foresight(foresightConfig)
+        );
+    }
 }

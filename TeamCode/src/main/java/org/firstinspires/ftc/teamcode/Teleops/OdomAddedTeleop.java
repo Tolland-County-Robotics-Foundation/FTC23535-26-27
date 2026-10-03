@@ -21,7 +21,7 @@ public class OdomAddedTeleop extends LinearOpMode {
         drivetrain.init(hardwareMap);
 
         // Initializes the Pedro Pathing follower
-        follower = Constants.create(hardwareMap);
+        //follower = Constants.create(hardwareMap);
 
         waitForStart();
 
