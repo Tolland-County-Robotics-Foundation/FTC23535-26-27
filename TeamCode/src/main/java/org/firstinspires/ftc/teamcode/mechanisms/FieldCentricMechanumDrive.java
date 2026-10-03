@@ -36,6 +36,8 @@ public class FieldCentricMechanumDrive {
                 RevHubOrientationOnRobot.UsbFacingDirection.LEFT
         ));
         imu.initialize(parameters);
+
+        imu.resetYaw();
     }
 
     public void drive(double drive, double strafe, double turn) {
@@ -44,7 +46,7 @@ public class FieldCentricMechanumDrive {
         //Driving sideways usualdrive takes more power than driving forwards
         strafe = strafe * 1.25;
 
-        double SpeedMultiplier = 0.75;
+        double SpeedMultiplier = 0.65;
 
         double heading = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
 

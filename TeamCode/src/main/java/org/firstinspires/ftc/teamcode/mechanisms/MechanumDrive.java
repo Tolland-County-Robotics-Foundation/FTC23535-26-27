@@ -33,7 +33,7 @@ public class MechanumDrive {
         //Driving sideways usually takes more power than driving forwards
         strafe = strafe * 1.25;
 
-        double SpeedMultiplier = 0.75;
+        double SpeedMultiplier = 0.65;
 
         double flPower = (drive - strafe - turn) * SpeedMultiplier;
         double frPower = (drive + strafe + turn) * SpeedMultiplier;
