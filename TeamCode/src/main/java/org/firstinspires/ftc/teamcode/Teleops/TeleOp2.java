@@ -28,9 +28,9 @@ public class TeleOp2 extends LinearOpMode {
             //runs our movement method with our gamepad parameters
             drivetrain.drive(gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
 
-            if (gamepad2.right_bumper) {
+            if (gamepad1.right_bumper) {
                 intake.runIntake();
-            } else if (gamepad2.left_bumper) {
+            } else if (gamepad1.left_bumper) {
                 intake.runOuttake();
             } else {
                 intake.stopIntake();

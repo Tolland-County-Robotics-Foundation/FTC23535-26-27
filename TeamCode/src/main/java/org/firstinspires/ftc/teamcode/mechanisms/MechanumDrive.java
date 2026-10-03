@@ -15,10 +15,10 @@ public class MechanumDrive {
     private DcMotor backRight;
 
     public void init(HardwareMap hardwareMap) {
-        frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
-        frontRight = hardwareMap.get(DcMotor.class, "frontRight");
-        backLeft = hardwareMap.get(DcMotor.class, "backLeft");
-        backRight = hardwareMap.get(DcMotor.class, "backRight");
+        frontLeft = hardwareMap.get(DcMotor.class, "lf");
+        frontRight = hardwareMap.get(DcMotor.class, "rf");
+        backLeft = hardwareMap.get(DcMotor.class, "lr");
+        backRight = hardwareMap.get(DcMotor.class, "rr");
 
 
 
@@ -33,7 +33,7 @@ public class MechanumDrive {
         //Driving sideways usually takes more power than driving forwards
         strafe = strafe * 1.25;
 
-        double SpeedMultiplier = 0.65;
+        double SpeedMultiplier = 0.75;
 
         double flPower = (drive - strafe - turn) * SpeedMultiplier;
         double frPower = (drive + strafe + turn) * SpeedMultiplier;
