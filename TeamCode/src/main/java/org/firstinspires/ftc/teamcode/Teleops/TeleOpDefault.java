@@ -20,7 +20,7 @@ public class TeleOpDefault extends LinearOpMode {
         while (opModeIsActive()) {
 
             //runs our movement method with our gamepad parameters
-            drivetrain.drive(gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
+            drivetrain.drive(gamepad1.left_stick_y, -gamepad1.left_stick_x, gamepad1.right_stick_x);
 
 
         }

@@ -39,7 +39,7 @@ public class OdomAddedTeleop extends LinearOpMode {
                     isHolding = false;
                 }
                 // Manual teleop drive when trigger is released
-                drivetrain.drive(gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
+                drivetrain.drive(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
             }
             telemetry.addData("Lock Triggered:", isHolding);
             telemetry.addData("Pose:", follower.pose());
