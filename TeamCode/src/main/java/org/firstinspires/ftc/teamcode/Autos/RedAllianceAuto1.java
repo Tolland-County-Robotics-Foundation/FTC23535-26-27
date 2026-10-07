@@ -21,7 +21,6 @@ import static com.pedropathing.ivy.pedro.PedroCommands.follow;
 
 @Autonomous
 public class RedAllianceAuto1 extends OpMode {
-
         Intake intake = new Intake();
     private Follower follower;
     private final PoseFactory p = PoseFactory.degrees();
@@ -74,7 +73,13 @@ public class RedAllianceAuto1 extends OpMode {
         //shooter
         //limelight
         //intake
-
+        if (follower.currentPath() == path1())  {
+            intake.runIntake();
+        } else if (follower.currentPath() == path2()) {
+            intake.runOuttake();
+        } else {
+            intake.stopIntake();
+        }
         //transfer
 
         telemetry.addData("X", follower.pose().x());
