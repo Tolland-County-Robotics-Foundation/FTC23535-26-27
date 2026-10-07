@@ -5,13 +5,12 @@ package org.firstinspires.ftc.teamcode.Teleops;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.mechanisms.FieldCentricMechanumDrive;
-import org.firstinspires.ftc.teamcode.mechanisms.MechanumDrive;
+import org.firstinspires.ftc.teamcode.mechanisms.FieldCentricMecanumDrive;
 
 @TeleOp(name="FieldCentricTeleOp1", group="Linear OpMode")
 public class FieldCentricTeleOp1 extends LinearOpMode {
 
-    FieldCentricMechanumDrive drivetrain = new FieldCentricMechanumDrive();
+    FieldCentricMecanumDrive drivetrain = new FieldCentricMecanumDrive();
 
     @Override
     public void runOpMode() {

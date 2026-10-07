@@ -6,12 +6,12 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.mechanisms.Intake;
-import org.firstinspires.ftc.teamcode.mechanisms.MechanumDrive;
+import org.firstinspires.ftc.teamcode.mechanisms.MecanumDrive;
 
 @TeleOp(name="TeleOp2 With Intake", group="Linear OpMode")
 public class TeleOp2 extends LinearOpMode {
 
-    MechanumDrive drivetrain = new MechanumDrive();
+    MecanumDrive drivetrain = new MecanumDrive();
     Intake intake = new Intake();
 
     @Override

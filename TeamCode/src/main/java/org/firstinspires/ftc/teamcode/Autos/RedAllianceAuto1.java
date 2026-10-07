@@ -8,6 +8,7 @@ import com.pedropathing.follower.Follower;
 import com.pedropathing.math.Pose;
 import com.pedropathing.paths.Path;
 
+import org.firstinspires.ftc.teamcode.mechanisms.Intake;
 import org.firstinspires.ftc.teamcode.pedro.Constants;
 
 import com.pedropathing.ivy.Command;
@@ -19,8 +20,9 @@ import static com.pedropathing.ivy.groups.Groups.sequential;
 import static com.pedropathing.ivy.pedro.PedroCommands.follow;
 
 @Autonomous
-public class MovementAuto extends OpMode {
+public class RedAllianceAuto1 extends OpMode {
 
+        Intake intake = new Intake();
     private Follower follower;
     private final PoseFactory p = PoseFactory.degrees();
 
@@ -55,6 +57,8 @@ public class MovementAuto extends OpMode {
         follower = Constants.create(hardwareMap);
         follower.setPose(start);
         follower.update();
+
+        intake.init(hardwareMap);
     }
 
     @Override
@@ -70,6 +74,7 @@ public class MovementAuto extends OpMode {
         //shooter
         //limelight
         //intake
+
         //transfer
 
         telemetry.addData("X", follower.pose().x());

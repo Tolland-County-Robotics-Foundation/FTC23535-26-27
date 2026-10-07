@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-public class MechanumDrive {
+public class MecanumDrive {
 
     private DcMotor frontLeft;
     private DcMotor frontRight;
