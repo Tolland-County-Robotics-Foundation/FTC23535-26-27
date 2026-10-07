@@ -1,9 +1,13 @@
+/* Mecnum drive mechanism for Teleop one, this takes the input(controllers)
+and then outputs(power to motors).
+*/
 package org.firstinspires.ftc.teamcode.mechanisms;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-public class MecanumDrive {
+public class MechanumDrive {
 
     private DcMotor frontLeft;
     private DcMotor frontRight;
@@ -17,8 +21,11 @@ public class MecanumDrive {
         backRight = hardwareMap.get(DcMotor.class, "rr");
 
 
-        frontLeft.setDirection(DcMotor.Direction.REVERSE);
+
         backLeft.setDirection(DcMotor.Direction.REVERSE);
+        frontLeft.setDirection(DcMotor.Direction.FORWARD);
+        backRight.setDirection(DcMotor.Direction.FORWARD);
+        frontRight.setDirection(DcMotor.Direction.REVERSE);
     }
 
     public void drive(double drive, double strafe, double turn) {
@@ -26,12 +33,12 @@ public class MecanumDrive {
         //Driving sideways usually takes more power than driving forwards
         strafe = strafe * 1.25;
 
-        double SpeedMultiplier = 1;
+        double SpeedMultiplier = 0.75;
 
-        double flPower = (drive + strafe + turn) * SpeedMultiplier;
-        double frPower = (drive - strafe - turn) * SpeedMultiplier;
-        double blPower = (drive - strafe + turn) * SpeedMultiplier;
-        double brPower = (drive + strafe - turn) * SpeedMultiplier;
+        double flPower = (drive - strafe - turn) * SpeedMultiplier;
+        double frPower = (drive + strafe + turn) * SpeedMultiplier;
+        double blPower = (drive + strafe - turn) * SpeedMultiplier;
+        double brPower = (drive - strafe + turn) * SpeedMultiplier;
 
         // Normalize the values so no wheel power exceeds 100%
         double max = Math.max(Math.abs(flPower), Math.abs(frPower));

@@ -1,16 +1,17 @@
 /* This is the base Teleop program for mecanum drive.
-*/
+ */
 package org.firstinspires.ftc.teamcode.Teleops;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.mechanisms.MecanumDrive;
+import org.firstinspires.ftc.teamcode.mechanisms.FieldCentricMechanumDrive;
+import org.firstinspires.ftc.teamcode.mechanisms.MechanumDrive;
 
-@TeleOp(name="TeleOpDefault", group="Linear OpMode")
-public class TeleOpDefault extends LinearOpMode {
+@TeleOp(name="FieldCentricTeleOp1", group="Linear OpMode")
+public class FieldCentricTeleOp1 extends LinearOpMode {
 
-    MecanumDrive drivetrain = new MecanumDrive();
+    FieldCentricMechanumDrive drivetrain = new FieldCentricMechanumDrive();
 
     @Override
     public void runOpMode() {
@@ -22,7 +23,7 @@ public class TeleOpDefault extends LinearOpMode {
         while (opModeIsActive()) {
 
             //runs our movement method with our gamepad parameters
-            drivetrain.drive(gamepad1.left_stick_y, -gamepad1.left_stick_x, gamepad1.right_stick_x);
+            drivetrain.drive(gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
 
 
         }
