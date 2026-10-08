@@ -11,9 +11,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 public class BiobuzzPollenTracker extends LinearOpMode {
 
     // Hardware
-    private DistanceSensor intakeSensor;
-    private DistanceSensor outtakeSensor;
-    private DcMotor intakeMotor;
+    private DistanceSensor intake_Sensor;
+    private DistanceSensor outtake_Sensor;
+    private DcMotor intake_Motor;
 
     // Detection Threshold (adjust after testing in cm)
     private static final double THRESHOLD_CM = 6.0;
@@ -23,19 +23,19 @@ public class BiobuzzPollenTracker extends LinearOpMode {
     private int y_OuttakeCount = 0;  // Total Pollen Exited
     private int P_PollenStored = 0;  // Live Inventory: P = x - y
 
-    // State machine flags to prevent double counting
+
     private boolean intakeDetected = false;
     private boolean outtakeDetected = false;
 
-    // FTC BIOBUZZ possession cap
+
     private static final int MAX_CAPACITY = 4;
 
     @Override
     public void runOpMode() {
         // Map hardware to Driver Station configuration names
-        intakeSensor = hardwareMap.get(DistanceSensor.class, "intake_sensor");
-        outtakeSensor = hardwareMap.get(DistanceSensor.class, "outtake_sensor");
-        intakeMotor = hardwareMap.get(DcMotor.class, "intake_motor");
+        intake_Sensor = hardwareMap.get(DistanceSensor.class, "intake_sensor");
+        outtake_Sensor = hardwareMap.get(DistanceSensor.class, "outtake_sensor");
+        intake_Motor = hardwareMap.get(DcMotor.class, "intake_motor");
 
         telemetry.addData("Status", "Initialized");
         telemetry.update();
@@ -44,8 +44,8 @@ public class BiobuzzPollenTracker extends LinearOpMode {
 
         while (opModeIsActive()) {
             // Read distances from sensors
-            double intakeDist = intakeSensor.getDistance(DistanceUnit.CM);
-            double outtakeDist = outtakeSensor.getDistance(DistanceUnit.CM);
+            double intakeDist = intake_Sensor.getDistance(DistanceUnit.CM);
+            double outtakeDist = outtake_Sensor.getDistance(DistanceUnit.CM);
 
             // --- 1. INTAKE SENSOR LOGIC (+1) ---
             if (intakeDist < THRESHOLD_CM) {
@@ -80,15 +80,15 @@ public class BiobuzzPollenTracker extends LinearOpMode {
             if (gamepad1.right_trigger > 0.1) {
                 // Prevent intaking if at max capacity (4/4 rule enforcement)
                 if (P_PollenStored >= MAX_CAPACITY) {
-                    intakeMotor.setPower(0);
+                    intake_Motor.setPower(0);
                 } else {
-                    intakeMotor.setPower(gamepad1.right_trigger);
+                    intake_Motor.setPower(gamepad1.right_trigger);
                 }
             } else if (gamepad1.left_trigger > 0.1) {
                 // Reverse intake
-                intakeMotor.setPower(-gamepad1.left_trigger);
+                intake_Motor.setPower(-gamepad1.left_trigger);
             } else {
-                intakeMotor.setPower(0);
+                intake_Motor.setPower(0);
             }
 
             // --- 5. EMERGENCY MANUAL COUNTER RESET ---
