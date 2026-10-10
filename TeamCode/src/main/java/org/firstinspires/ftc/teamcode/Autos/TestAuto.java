@@ -20,7 +20,7 @@ import static com.pedropathing.ivy.groups.Groups.sequential;
 import static com.pedropathing.ivy.pedro.PedroCommands.follow;
 
 @Autonomous
-public class RedAllianceAuto1 extends OpMode {
+public class TestAuto extends OpMode {
         Intake intake = new Intake();
     private Follower follower;
     private final PoseFactory p = PoseFactory.degrees();
