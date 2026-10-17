@@ -72,7 +72,7 @@ public class TestAuto extends OpMode {
 
         //shooter
         //limelight
-        //intake
+        //intake commands
         if (follower.currentPath() == path1())  {
             intake.runIntake();
         } else if (follower.currentPath() == path2()) {
