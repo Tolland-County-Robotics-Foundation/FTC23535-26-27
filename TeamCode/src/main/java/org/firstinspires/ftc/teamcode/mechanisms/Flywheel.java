@@ -20,15 +20,24 @@ public class Flywheel {
         flywheel.setDirection(DcMotorEx.Direction.FORWARD);
     }
 
-    public void runflywheel(float dpad_up){
+    public void runflywheel(){
 
         target = 2000;
         double RPM = flywheel.getVelocity()* 60;
 
         double power = pidf.CALCULATE(kp, ki, kd, kf, target, RPM);
+        flywheel.setPower(power);
 
+    }
+    public void stopflywheel(){
+
+        double power = 0;
+        flywheel.setPower(power);
 
     }
 
+
+
 }
+
 

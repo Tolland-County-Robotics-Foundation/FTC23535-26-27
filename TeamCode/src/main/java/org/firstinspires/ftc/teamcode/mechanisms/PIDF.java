@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class PIDF {
-    public ElapsedTime timer = new ElapsedTime();
+    public ElapsedTime timer = new ElapsedTime(); //metioning timer
     public double integralsum = 0;
     public double previouserror;
     public double error;
