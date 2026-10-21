@@ -12,6 +12,9 @@ public class limelightShooting extends OpMode {
     private Limelight3A limeLight;
     private IMU imu;
     private double distance;
+    double tagcount;
+    double Ta;
+
     @Override
     public void init() {
         limeLight = hardwareMap.get(Limelight3A.class, "limeLight");
@@ -32,16 +35,20 @@ public class limelightShooting extends OpMode {
         LLResult LLResult = limeLight.getLatestResult();
         if (LLResult != null && LLResult.isValid()) {
             Pose3D botPose = LLResult.getBotpose_MT2();
-            distance = getDistanceFromTage(LLResult.getTa());
+            tagcount = LLResult.getFiducialResults().size();
+            Ta = LLResult.getTa()/tagcount;
+            distance = getDistanceFromTage(Ta);
             telemetry.addData("distance",distance); // shows on screen
             telemetry.addData("Tx", LLResult.getTx());
             telemetry.addData("Ty", LLResult.getTy());
-            telemetry.addData("Ta", LLResult.getTa());
+            telemetry.addData("Ta",Ta);
+            telemetry.addData("tagcount",tagcount);
+
         }
     }
     public double getDistanceFromTage (double ta) {
-        double scale =419.979 ; //this is whare to put the y value in the equation//
-        double distance = (scale / ta);
+        double scale =83.6021 ; //this is whare to put the y value in the equation//
+        double distance = (scale/ (ta));
         return distance;
     }
 }
