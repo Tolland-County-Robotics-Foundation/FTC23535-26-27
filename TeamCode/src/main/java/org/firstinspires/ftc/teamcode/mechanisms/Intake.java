@@ -11,14 +11,14 @@ public class Intake {
         intake = hardwareMap.get(DcMotor.class, "intake");
         intake.setDirection(DcMotor.Direction.FORWARD);
     }
-//intiates code
+//intakes code
    public void runIntake() {
         intake.setPower(1.0);
 //runs intake
 
     } public void runOuttake() {
         intake.setPower(-1.0);
-//runs outake
+//runs outtake
 
 
 

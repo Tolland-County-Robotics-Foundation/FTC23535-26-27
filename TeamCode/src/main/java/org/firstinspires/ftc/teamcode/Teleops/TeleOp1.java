@@ -2,9 +2,11 @@
 */
 package org.firstinspires.ftc.teamcode.Teleops;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.mechanisms.MechanumDrive;
+
 
 @TeleOp(name="TeleOp1", group="Linear OpMode")
 public class TeleOp1 extends LinearOpMode {
