@@ -19,5 +19,5 @@ dependencies {
 
     implementation 'com.pedropathing:revhub:3.0.0'
     implementation 'com.pedropathing:tuning:1.0.0'
-    implementation 'com.acmerobotics.dashboard:dashboard:0.4.16'
+    implementation 'com.acmerobotics.slothboard:dashboard:0.3.0+0.6.0'
 }
