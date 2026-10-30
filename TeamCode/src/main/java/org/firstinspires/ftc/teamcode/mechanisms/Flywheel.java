@@ -19,6 +19,8 @@ public class Flywheel {
     public static double ka;
     public static double kv;
 
+    public double lastargetvelocity;
+
 
     public static double target = 2000;
 
@@ -31,13 +33,15 @@ public class Flywheel {
 
         double RPM = flywheel.getVelocity() * (60.0/28.0);
 
-        double power = pidf.CALCULATE(kp, ki, kd, kf,ka,kv,ks, target, RPM);
+        double power = pidf.CALCULATE(kp, ki, kd, target, RPM, ks,ka,kv);
         flywheel.setPower(power);
+;
     }
 
 
     public void stopflywheel(){
         flywheel.setPower(0);
+        pidf.Reset();
     }
 }
 

@@ -10,10 +10,10 @@ public class PIDF {
     public double previouserror;
     public double error;
     public double deltatime = 0.0001;
-    public double lastargetvelocity=0;
+    public double lastarget=0;
 
 
-    public double CALCULATE(double kp, double ki, double kd, double kf, double target, double currentposition,double ks, double ka, double kv) {
+    public double CALCULATE(double kp, double ki, double kd, double target, double currentposition,double ks, double ka, double kv) {
 
         deltatime = timer.seconds();
 
@@ -28,12 +28,13 @@ public class PIDF {
 
         double sign=Math.signum(target);
 
-        double targetacceleration=(lastargetvelocity-target)/deltatime;
+        double targetacceleration=(target-lastarget)/deltatime;
 
-        double f = ks*sign+kv*target+ka*targetacceleration;
+        double f = (ks*sign)+(kv*target)+(ka*targetacceleration);
 
         double output = p + i + d + f; // add all the pidf to create the otuput
         previouserror = error;
+        lastarget=target;
         timer.reset(); // reetts the timer loop
 
         return output;
