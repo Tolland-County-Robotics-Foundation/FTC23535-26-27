@@ -20,13 +20,11 @@ public class limelightShooting {
     public void init(HardwareMap hardwareMap) {
         limeLight = hardwareMap.get(Limelight3A.class, "limeLight");
         limeLight.pipelineSwitch(0);  //apraltag pipline = 0
-
-
-    }
-
-    public void start() {
         limeLight.start();
+
     }
+
+
 
     public double getDistanceFromTage(String teamcolor) {
         if (teamcolor == "red") {
