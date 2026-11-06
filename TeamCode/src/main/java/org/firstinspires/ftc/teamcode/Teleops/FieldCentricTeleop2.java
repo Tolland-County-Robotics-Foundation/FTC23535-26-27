@@ -18,7 +18,7 @@ public class FieldCentricTeleop2 extends LinearOpMode {
     @Override
     public void runOpMode() {
         //Initializes the motors in our Method aka function
-        drivetrain.init(hardwareMap);
+        drivetrain.init(hardwareMap, 1);
 
         intake.init(hardwareMap);
 

@@ -3,21 +3,21 @@ package org.firstinspires.ftc.teamcode.mechanisms;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.acmerobotics.dashboard.config.Config;
 
-@Config
+
+
 public class Flywheel {
 
     PIDF pidf = new PIDF();
 
     public DcMotorEx flywheel;
-    public static double kp;
-    public static double ki ;
-    public static double kd;
+    public static double kp = 0.012;
+    public static double ki = 0.0001;
+    public static double kd = 0;
     public static double kf;
-    public static double ks;
-    public static double ka;
-    public static double kv;
+    public static double ks = 0.18;
+    public static double ka = 0.6;
+    public static double kv = 0.000175;
 
     public double lastargetvelocity;
 

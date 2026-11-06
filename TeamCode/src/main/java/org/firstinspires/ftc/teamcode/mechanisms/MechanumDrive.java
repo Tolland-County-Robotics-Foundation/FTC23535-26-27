@@ -6,6 +6,7 @@ package org.firstinspires.ftc.teamcode.mechanisms;
 
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 
@@ -19,25 +20,43 @@ public class MechanumDrive {
     private DcMotor backRight;
     private IMU imu;
 
-    public void init(HardwareMap hardwareMap) {
+    public void init(HardwareMap hardwareMap, int robot) {
         frontLeft = hardwareMap.get(DcMotor.class, "lf");
         frontRight = hardwareMap.get(DcMotor.class, "rf");
         backLeft = hardwareMap.get(DcMotor.class, "lr");
         backRight = hardwareMap.get(DcMotor.class, "rr");
 
-        backLeft.setDirection(DcMotor.Direction.REVERSE);
-        frontLeft.setDirection(DcMotor.Direction.FORWARD);
-        backRight.setDirection(DcMotor.Direction.FORWARD);
-        frontRight.setDirection(DcMotor.Direction.REVERSE);
 
+
+        if (robot == 1) {
         imu = hardwareMap.get(IMU.class, "imu");
         IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(
                 RevHubOrientationOnRobot.LogoFacingDirection.UP,
                 RevHubOrientationOnRobot.UsbFacingDirection.LEFT
         ));
         imu.initialize(parameters);
-
         imu.resetYaw();
+
+            backLeft.setDirection(DcMotor.Direction.REVERSE);
+            frontLeft.setDirection(DcMotor.Direction.FORWARD);
+            backRight.setDirection(DcMotor.Direction.FORWARD);
+            frontRight.setDirection(DcMotor.Direction.REVERSE);
+
+        } else if (robot == 2) {
+            imu = hardwareMap.get(IMU.class, "imu");
+            IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(
+                    RevHubOrientationOnRobot.LogoFacingDirection.RIGHT,
+                    RevHubOrientationOnRobot.UsbFacingDirection.UP
+            ));
+            imu.initialize(parameters);
+            imu.resetYaw();
+
+            backLeft.setDirection(DcMotor.Direction.FORWARD);
+            frontLeft.setDirection(DcMotor.Direction.REVERSE);
+            backRight.setDirection(DcMotor.Direction.REVERSE);
+            frontRight.setDirection(DcMotor.Direction.REVERSE);
+        }
+
     }
 
     public void FieldCentricDrive(double drive, double strafe, double turn) {

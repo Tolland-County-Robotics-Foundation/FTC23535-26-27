@@ -1,7 +1,8 @@
 /* This is the base Teleop program for mecanum drive.
- */
+
 package org.firstinspires.ftc.teamcode.Teleops;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -12,7 +13,7 @@ import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 
-
+@Disabled
 @TeleOp(name="FieldCentricTeleOp3", group="Linear OpMode")
 public class FieldCentricTeleop3 extends LinearOpMode {
 
@@ -25,7 +26,7 @@ public class FieldCentricTeleop3 extends LinearOpMode {
     @Override
     public void runOpMode() {
         //Initializes the motors in our Method aka function
-        //drivetrain.init(hardwareMap);
+        //drivetrain.init(hardwareMap, 1);
 
         //intake.init(hardwareMap);
 
@@ -40,7 +41,7 @@ public class FieldCentricTeleop3 extends LinearOpMode {
         while (opModeIsActive()) {
 
             //runs our movement method with our gamepad parameters
-           /* drivetrain.FieldCentricDrive(gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
+           drivetrain.FieldCentricDrive(gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
 
             if (gamepad2.right_bumper) {
                 intake.runIntake();
@@ -48,7 +49,7 @@ public class FieldCentricTeleop3 extends LinearOpMode {
                 intake.runOuttake();
             } else {
                 intake.stopIntake();
-            } */
+            }
 
             if(gamepad1.left_trigger > 0.2){
                 flywheel.runflywheel();
@@ -63,4 +64,4 @@ public class FieldCentricTeleop3 extends LinearOpMode {
             telemetry.update();
         }
     }
-}
+} */
