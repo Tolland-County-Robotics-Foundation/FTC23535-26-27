@@ -16,6 +16,7 @@ public class BiobuzzPollenTracker extends LinearOpMode {
 
 
     private static final double THRESHOLD_CM = 6.0;
+    private  static  final double ThresholdCm = 9.0;
 
 
     private int x_IntakeCount = 0;
