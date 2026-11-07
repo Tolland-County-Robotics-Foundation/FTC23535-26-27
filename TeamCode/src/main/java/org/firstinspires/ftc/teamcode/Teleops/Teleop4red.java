@@ -48,7 +48,7 @@ public class Teleop4red extends LinearOpMode {
             }
 
             if(gamepad1.left_trigger > 0.2){
-                flywheel.runflywheel(2000);
+                flywheel.runflywheelwhithcamrared();
             } else {
                 flywheel.stopflywheel();
             }
