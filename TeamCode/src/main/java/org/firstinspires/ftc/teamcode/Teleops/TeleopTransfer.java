@@ -50,7 +50,7 @@ public class TeleopTransfer extends LinearOpMode {
             }
 
             if(gamepad1.left_trigger > 0.2){
-                flywheel.runflywheel();
+                flywheel.runflywheel(2000);
             } else {
                 flywheel.stopflywheel();
             }
