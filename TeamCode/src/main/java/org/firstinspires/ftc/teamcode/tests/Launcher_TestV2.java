@@ -38,8 +38,6 @@ public class Launcher_TestV2 extends LinearOpMode {
 
         flywheel.init(hardwareMap);
 
-        flywheel.initlimelight(hardwareMap);
-
         limelightShooting.init(hardwareMap);
 
         runtime.startTime();
@@ -50,6 +48,18 @@ public class Launcher_TestV2 extends LinearOpMode {
 
         while (opModeIsActive()) {
 
+            if (gamepad1.right_bumper) {
+                intake.runIntake();
+                Transfer.runTransfer();
+            } else if (gamepad1.left_bumper) {
+                intake.runOuttake();
+                Transfer.runTransferback();
+            } else {
+                intake.stopIntake();
+                Transfer.stopTransfer();
+            }
+
+
             if (gamepad1.a) {
                 teamcolor = "red";
             } else if (gamepad1.b) {
@@ -57,10 +67,10 @@ public class Launcher_TestV2 extends LinearOpMode {
             }
 
             if (gamepad1.dpad_up && runtime.seconds() > 0.1 ) {
-                RPM = RPM + 1;
+                RPM = RPM + 5;
                 runtime.reset();
             } else if (gamepad1.dpad_down && runtime.seconds() > 0.1) {
-                RPM = RPM - 1;
+                RPM = RPM - 5;
                 runtime.reset();
             }
 
@@ -73,9 +83,9 @@ public class Launcher_TestV2 extends LinearOpMode {
             telemetry.addLine("Dpad up to increase RPM, Dpad down to decrease RPM");
             telemetry.addLine("Press a to switch to red, Press b to switch to blue");
             telemetry.addData("TeamColor", teamcolor);
-            telemetry.addData("Distance", limelightShooting.getDistanceFromTage("red"));
+            telemetry.addData("Distance", limelightShooting.getDistanceFromTage(teamcolor));
             telemetry.addData("rpm", flywheel.flywheel.getVelocity() * (60.0/28.0));
-            telemetry.addData("power %", flywheel.flywheel.getPower() * 100);
+            telemetry.addData("our RPM %", RPM);
             telemetry.update();
         }
     }}

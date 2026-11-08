@@ -53,7 +53,7 @@ public class Teleop4red extends LinearOpMode {
                 flywheel.stopflywheel();
             }
 
-            if (Math.abs(flywheel.RPM - flywheel.target) <= 100) {
+            if (gamepad1.left_trigger > 0.2 && Math.abs(flywheel.RPM - flywheel.target) <= 100) {
                 Transfer.runTransfer();
             } else {
                 Transfer.stopTransfer();
@@ -64,7 +64,7 @@ public class Teleop4red extends LinearOpMode {
 
             telemetry.addData("target", flywheel.target);
             telemetry.addData("trigger",gamepad1.left_trigger);
-            telemetry.addData("rpm", flywheel.flywheel.getVelocity() * (60.0/28.0));
+            telemetry.addData("rpm", flywheel.RPM);
             telemetry.addData("power %", flywheel.flywheel.getPower() * 100);
             telemetry.update();
         }
