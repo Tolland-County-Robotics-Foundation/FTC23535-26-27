@@ -15,7 +15,7 @@ public class Flywheel {
     public static double ki = 0.0001;
     public static double kd = 0;
     public static double ks = 0.18;
-    public static double ka = 0.6;
+    public static double ka = 0;
     public static double kv = 0.000175;
 
     public double target;
@@ -38,24 +38,14 @@ public class Flywheel {
 
     }
 
-    public void runflywheelwhithcamrared(){
-        double distance = limelightShooting.getDistanceFromTage("red");
+    public void runflywheelwithcamera(String teamcolor){
+        double distance = limelightShooting.getDistanceFromTage(teamcolor);
 
-        target = 4.26 * Math.exp(1.47e-3 * distance); //we will change to be the formula
-
-        RPM = flywheel.getVelocity() * (60.0/28.0);
-
-        double power = pidf.CALCULATE(kp, ki, kd, target, RPM, ks,ka,kv);
-        flywheel.setPower(power);
-
-    }
-
-    public void runflywheelwhithcamrablue(){
-        double distance = limelightShooting.getDistanceFromTage("blue");
+        if (distance > 0) {
+            target = 670.04 * Math.log(distance) - 928.24;
+        }
 
         RPM = flywheel.getVelocity() * (60.0/28.0);
-
-        target = 4.26 * Math.exp(1.47e-3 * distance);; //we will change to be the formula
 
         double power = pidf.CALCULATE(kp, ki, kd, target, RPM, ks,ka,kv);
         flywheel.setPower(power);

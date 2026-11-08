@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.mechanisms.Flywheel;
 import org.firstinspires.ftc.teamcode.mechanisms.Intake;
 import org.firstinspires.ftc.teamcode.mechanisms.MechanumDrive;
+import org.firstinspires.ftc.teamcode.mechanisms.limelightShooting;
 import org.firstinspires.ftc.teamcode.mechanisms.transfer;
 
 @TeleOp(name="FieldCentricTeleOp4 for red", group="Linear OpMode")
@@ -21,6 +22,8 @@ public class Teleop4red extends LinearOpMode {
 
     Intake intake = new Intake();
 
+    limelightShooting limelightShooting = new limelightShooting();
+
     @Override
     public void runOpMode() {
         //Initializes the motors in our Method aka function
@@ -31,6 +34,8 @@ public class Teleop4red extends LinearOpMode {
         Transfer.init(hardwareMap);
 
         flywheel.init(hardwareMap);
+
+        limelightShooting.init(hardwareMap);
         waitForStart();
 
         while (opModeIsActive()) {
@@ -39,16 +44,16 @@ public class Teleop4red extends LinearOpMode {
             drivetrain.FieldCentricDrive(gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
 
             if (gamepad1.right_bumper) {
-                intake.runIntake();
-            } else if (gamepad1.left_bumper) {
                 intake.runOuttake();
                 Transfer.runTransferback();
+            } else if (gamepad1.left_bumper) {
+                intake.runIntake();
             } else {
                 intake.stopIntake();
             }
 
             if(gamepad1.left_trigger > 0.2){
-                flywheel.runflywheelwhithcamrared();
+                flywheel.runflywheelwithcamera("red");
             } else {
                 flywheel.stopflywheel();
             }
@@ -61,7 +66,7 @@ public class Teleop4red extends LinearOpMode {
 
 
 
-
+            telemetry.addData("Distance", limelightShooting.getDistanceFromTage("red"));
             telemetry.addData("target", flywheel.target);
             telemetry.addData("trigger",gamepad1.left_trigger);
             telemetry.addData("rpm", flywheel.RPM);
