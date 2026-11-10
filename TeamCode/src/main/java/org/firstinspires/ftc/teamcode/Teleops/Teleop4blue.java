@@ -5,14 +5,18 @@ package org.firstinspires.ftc.teamcode.Teleops;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import org.firstinspires.ftc.teamcode.mechanisms.AutoAlign;
 import org.firstinspires.ftc.teamcode.mechanisms.Flywheel;
 import org.firstinspires.ftc.teamcode.mechanisms.Intake;
 import org.firstinspires.ftc.teamcode.mechanisms.MechanumDrive;
 import org.firstinspires.ftc.teamcode.mechanisms.limelightShooting;
 import org.firstinspires.ftc.teamcode.mechanisms.transfer;
+import org.firstinspires.ftc.teamcode.mechanisms.AutoAlign;
 
 @TeleOp(name="FieldCentricTeleOp4 for blue", group="Linear OpMode")
 public class Teleop4blue extends LinearOpMode {
+
+    AutoAlign autoAlign = new AutoAlign();
 
     MechanumDrive drivetrain = new MechanumDrive();
 
@@ -23,6 +27,8 @@ public class Teleop4blue extends LinearOpMode {
     Intake intake = new Intake();
 
     limelightShooting limelightShooting = new limelightShooting();
+
+    String teamcolor = "blue";
 
     @Override
     public void runOpMode() {
@@ -36,12 +42,12 @@ public class Teleop4blue extends LinearOpMode {
         flywheel.init(hardwareMap);
 
         limelightShooting.init(hardwareMap);
+
+        autoAlign.init(hardwareMap);
         waitForStart();
 
         while (opModeIsActive()) {
 
-            //runs our movement method with our gamepad parameters
-            drivetrain.FieldCentricDrive(gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
 
             if (gamepad1.right_bumper) {
                 intake.runOuttake();
@@ -53,20 +59,26 @@ public class Teleop4blue extends LinearOpMode {
             }
 
             if(gamepad1.left_trigger > 0.2){
-                flywheel.runflywheelwithcamera("blue");
+                flywheel.runflywheelwithcamera(teamcolor);
+                autoAlign.Align(teamcolor);
             } else {
                 flywheel.stopflywheel();
+                autoAlign.stopAlign();
             }
 
+            //Only runs transfer when RPM is within range
             if (gamepad1.left_trigger > 0.2 && Math.abs(flywheel.RPM - flywheel.target) <= 100) {
                 Transfer.runTransfer();
             } else {
                 Transfer.stopTransfer();
             }
 
+            //runs our movement method with our gamepad parameters
+            drivetrain.Drive(gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
 
 
-            telemetry.addData("Distance", limelightShooting.getDistanceFromTage("blue"));
+
+            telemetry.addData("Distance", limelightShooting.getDistanceFromTage(teamcolor));
             telemetry.addData("target", flywheel.target);
             telemetry.addData("trigger",gamepad1.left_trigger);
             telemetry.addData("rpm", flywheel.RPM);
