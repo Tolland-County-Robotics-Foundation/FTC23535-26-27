@@ -12,7 +12,7 @@ import com.pedropathing.follower.Follower;
 import org.firstinspires.ftc.teamcode.mechanisms.Intake;
 import org.firstinspires.ftc.teamcode.mechanisms.Transfer;
 import org.firstinspires.ftc.teamcode.mechanisms.Flywheel;
-import org.firstinspires.ftc.teamcode.mechanisms.LimelightShooting;
+import org.firstinspires.ftc.teamcode.mechanisms.limelightShooting;
 import org.firstinspires.ftc.teamcode.pedro.Constants;
 
 import com.pedropathing.ivy.Command;
