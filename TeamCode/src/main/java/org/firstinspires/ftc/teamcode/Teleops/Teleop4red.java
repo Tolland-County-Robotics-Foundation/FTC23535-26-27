@@ -8,9 +8,9 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.mechanisms.AutoAlign;
 import org.firstinspires.ftc.teamcode.mechanisms.Flywheel;
 import org.firstinspires.ftc.teamcode.mechanisms.Intake;
-import org.firstinspires.ftc.teamcode.mechanisms.MechanumDrive;
+import org.firstinspires.ftc.teamcode.mechanisms.MecanumDrive;
 import org.firstinspires.ftc.teamcode.mechanisms.limelightShooting;
-import org.firstinspires.ftc.teamcode.mechanisms.transfer;
+import org.firstinspires.ftc.teamcode.mechanisms.Transfer;
 import org.firstinspires.ftc.teamcode.mechanisms.AutoAlign;
 
 @TeleOp(name="FieldCentricTeleOp4 for red", group="Linear OpMode")
@@ -18,11 +18,11 @@ public class Teleop4red extends LinearOpMode {
 
     AutoAlign autoAlign = new AutoAlign();
 
-    MechanumDrive drivetrain = new MechanumDrive();
+    MecanumDrive drivetrain = new MecanumDrive();
 
     Flywheel flywheel = new Flywheel();
 
-    transfer Transfer = new transfer();
+    Transfer transfer = new Transfer();
 
     Intake intake = new Intake();
 
@@ -37,7 +37,7 @@ public class Teleop4red extends LinearOpMode {
 
         intake.init(hardwareMap);
 
-        Transfer.init(hardwareMap);
+        transfer.init(hardwareMap);
 
         flywheel.init(hardwareMap);
 
@@ -51,7 +51,7 @@ public class Teleop4red extends LinearOpMode {
 
             if (gamepad1.right_bumper) {
                 intake.runOuttake();
-                Transfer.runTransferback();
+                transfer.runTransferBack();
             } else if (gamepad1.left_bumper) {
                 intake.runIntake();
             } else {
@@ -59,7 +59,7 @@ public class Teleop4red extends LinearOpMode {
             }
 
             if(gamepad1.left_trigger > 0.2){
-                flywheel.runflywheelwithcamera(teamcolor);
+                flywheel.runflywheelwithcamerared();
                 autoAlign.Align(teamcolor);
             } else {
                 flywheel.stopflywheel();
@@ -68,9 +68,9 @@ public class Teleop4red extends LinearOpMode {
 
             //Only runs transfer when RPM is within range
             if (gamepad1.left_trigger > 0.2 && Math.abs(flywheel.RPM - flywheel.target) <= 100) {
-                Transfer.runTransfer();
+                transfer.runTransfer();
             } else {
-                Transfer.stopTransfer();
+                transfer.stopTransfer();
             }
 
             //runs our movement method with our gamepad parameters

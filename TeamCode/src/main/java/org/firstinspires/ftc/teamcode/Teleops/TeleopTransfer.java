@@ -7,17 +7,17 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.mechanisms.Flywheel;
 import org.firstinspires.ftc.teamcode.mechanisms.Intake;
-import org.firstinspires.ftc.teamcode.mechanisms.MechanumDrive;
-import org.firstinspires.ftc.teamcode.mechanisms.transfer;
+import org.firstinspires.ftc.teamcode.mechanisms.MecanumDrive;
+import org.firstinspires.ftc.teamcode.mechanisms.Transfer;
 
 @TeleOp(name="FieldCentricTeleOp3 with transfer", group="Linear OpMode")
 public class TeleopTransfer extends LinearOpMode {
 
-    MechanumDrive drivetrain = new MechanumDrive();
+    MecanumDrive drivetrain = new MecanumDrive();
 
     Flywheel flywheel = new Flywheel();
 
-    transfer Transfer = new transfer();
+    Transfer transfer = new Transfer();
 
     Intake intake = new Intake();
 
@@ -28,7 +28,7 @@ public class TeleopTransfer extends LinearOpMode {
 
         intake.init(hardwareMap);
 
-        Transfer.init(hardwareMap);
+        transfer.init(hardwareMap);
 
         flywheel.init(hardwareMap);
         waitForStart();
@@ -40,13 +40,13 @@ public class TeleopTransfer extends LinearOpMode {
 
             if (gamepad1.right_bumper) {
                 intake.runIntake();
-                Transfer.runTransfer();
+                transfer.runTransfer();
             } else if (gamepad1.left_bumper) {
                 intake.runOuttake();
-                Transfer.runTransferback();
+                transfer.runTransferBack();
             } else {
                 intake.stopIntake();
-                Transfer.stopTransfer();
+                transfer.stopTransfer();
             }
 
             if(gamepad1.left_trigger > 0.2){

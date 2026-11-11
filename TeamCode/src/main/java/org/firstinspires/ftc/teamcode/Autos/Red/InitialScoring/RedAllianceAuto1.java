@@ -10,9 +10,9 @@ import com.pedropathing.api.PoseFactory;
 import com.pedropathing.follower.Follower;
 
 import org.firstinspires.ftc.teamcode.mechanisms.Intake;
-//import org.firstinspires.ftc.teamcode.mechanisms.Transfer;
-//import org.firstinspires.ftc.teamcode.mechanisms.Shooter;
-//import org.firstinspires.ftc.teamcode.mechanisms.Limelight;
+import org.firstinspires.ftc.teamcode.mechanisms.Transfer;
+import org.firstinspires.ftc.teamcode.mechanisms.Flywheel;
+import org.firstinspires.ftc.teamcode.mechanisms.LimelightShooting;
 import org.firstinspires.ftc.teamcode.pedro.Constants;
 
 import com.pedropathing.ivy.Command;
@@ -26,6 +26,8 @@ import static com.pedropathing.ivy.pedro.PedroCommands.follow;
 @Autonomous
 public class RedAllianceAuto1 extends OpMode {
     Intake intake = new Intake();
+    Transfer transfer = new Transfer();
+    Flywheel flywheel = new Flywheel();
     private Follower follower;
     private final PoseFactory p = PoseFactory.degrees();
 
@@ -104,10 +106,21 @@ public class RedAllianceAuto1 extends OpMode {
         //Intake
         if (follower.currentPath() == path2() && !follower.isBusy())  {
             intake.runIntake();
-        } else if (follower.currentPath() == path4() && !follower.isBusy()) {
+        }
+        else if (follower.currentPath() == path1() && !follower.isBusy()) {
+            transfer.runTransfer();
+            flywheel.runflywheelwithcamerared();
+        }
+        else if (follower.currentPath() == path4() && !follower.isBusy()) {
             intake.runIntake();
-        } else {
-            intake.stopIntake();
+        }
+        else if (follower.currentPath() == path3() && !follower.isBusy()) {
+            transfer.runTransfer();
+            flywheel.runflywheelwithcamerared();
+        }
+        else {
+            intake.runIntake();
+            transfer.runTransferBack();
         }
         //transfer
 

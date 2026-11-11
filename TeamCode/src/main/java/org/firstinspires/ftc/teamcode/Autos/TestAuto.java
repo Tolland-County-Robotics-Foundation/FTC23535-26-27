@@ -25,27 +25,16 @@ public class TestAuto extends OpMode {
     private Follower follower;
     private final PoseFactory p = PoseFactory.degrees();
 
-    private final Pose start = p.of(8.5,8.5, 78.7);
-    private final Pose stop1 = p.of(24,120,90);
-    private final Pose stop2 = p.of(120,120,0);
-    private final Pose control1 = p.of(120,24, 90);
-    private final Pose park = p.of(24,24,180);
+    private final Pose start = p.of(8.5,8.5, 0);
+    private final Pose stop1 = p.of(72,8.5,0);
 
     private Path path1() {
-        return line(start, stop1).linear(start, stop1);
-    }
-    private Path path2() {
-        return line(stop1, stop2).linear(stop1, stop2);
-    }
-    private Path curvePark() {
-        return curve(stop2, control1, park).linear(stop2, park);
+        return line(start, stop1).constant(start);
     }
 
     private Command autoRoutine() {
         return sequential(
-                follow(follower, path1()),
-                follow(follower, path2()),
-                follow(follower, curvePark())
+                follow(follower, path1())
         );
     }
 
@@ -75,8 +64,6 @@ public class TestAuto extends OpMode {
         //intake commands
         if (follower.currentPath() == path1())  {
             intake.runIntake();
-        } else if (follower.currentPath() == path2()) {
-            intake.runOuttake();
         } else {
             intake.stopIntake();
         }

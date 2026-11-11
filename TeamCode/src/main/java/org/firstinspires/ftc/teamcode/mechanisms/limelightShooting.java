@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 public class limelightShooting {
     private Limelight3A limeLight;
     private double distance = 0;
-    private double tagcount = 0;
+    private double tagCount = 0;
     private int currentPipeline = -1;
 
     public void init(HardwareMap hardwareMap) {
@@ -37,9 +37,9 @@ public class limelightShooting {
 
         LLResult LLResult = limeLight.getLatestResult();
         if (LLResult != null && LLResult.isValid()) {
-            tagcount = LLResult.getFiducialResults().size();
-            if (tagcount > 0) {
-                double ta = LLResult.getTa() / tagcount;
+            tagCount = LLResult.getFiducialResults().size();
+            if (tagCount > 0) {
+                double ta = LLResult.getTa() / tagCount;
                 double scale = 83.6021;
                 distance = (scale / ta);
             }

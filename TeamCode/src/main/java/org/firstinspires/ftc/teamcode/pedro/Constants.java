@@ -9,8 +9,10 @@ import com.pedropathing.math.Vector2D;
 import com.pedropathing.revhub.drivetrains.Mecanum;
 import com.pedropathing.revhub.drivetrains.MecanumConfig;
 import com.pedropathing.revhub.localizers.Encoder;
-import com.pedropathing.revhub.localizers.ThreeWheelConfig;
-import com.pedropathing.revhub.localizers.ThreeWheelLocalizer;
+import com.pedropathing.revhub.localizers.RevHubIMU;
+import com.pedropathing.revhub.localizers.ThreeWheelIMUConfig;
+import com.pedropathing.revhub.localizers.ThreeWheelIMULocalizer;
+import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
@@ -29,17 +31,24 @@ public class Constants {
             c.manualBrakeMode.set(true);
     });
 
-    public static ThreeWheelConfig localizerConfig = new ThreeWheelConfig(
-c -> {
+    public static ThreeWheelIMUConfig localizerConfig = new ThreeWheelIMUConfig(c -> {
         c.leftEncoderName.set("lf");
         c.rightEncoderName.set("rr");
         c.strafeEncoderName.set("lr");
-        c.leftPodY.set(2.750148391024103);
-        c.rightPodY.set(-2.653128447895786);
-        c.strafePodX.set(0.009182736482849);
-        c.forwardTicksToInches.set(0.0023439394940774254);
-        c.strafeTicksToInches.set(0.0019634242118254235);
-        c.turnTicksToRadians.set(0.0025276493394396473);
+        c.imuName.set("imu");
+        c.imu.set(new RevHubIMU(
+                new RevHubOrientationOnRobot(
+                    RevHubOrientationOnRobot.LogoFacingDirection.UP,
+                    RevHubOrientationOnRobot.UsbFacingDirection.LEFT
+                )
+            )
+        );
+        c.leftPodY.set(4.634835318297407);
+        c.rightPodY.set(-4.491978611181955);
+        c.strafePodX.set(-4.256743575873553E-15);
+        c.forwardTicksToInches.set(0.0020125452089235192);
+        c.strafeTicksToInches.set(0.0020577343358159704);
+        c.turnTicksToRadians.set(0.0035921738400818567);
         c.leftEncoderDirection.set(Encoder.REVERSE);
         c.rightEncoderDirection.set(Encoder.REVERSE);
         c.strafeEncoderDirection.set(Encoder.FORWARD);
@@ -75,7 +84,7 @@ c -> {
     public static Follower create(HardwareMap hardwareMap) {
         // return new Follower(Drivetrain, Localizer, Foresight);
         return new Follower(
-                new ThreeWheelLocalizer(hardwareMap, localizerConfig),
+                new ThreeWheelIMULocalizer(hardwareMap, localizerConfig),
                 new Mecanum(hardwareMap, drivetrainConfig),
                 new Foresight(foresightConfig)
         );

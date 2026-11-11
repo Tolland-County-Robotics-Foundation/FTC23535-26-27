@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.mechanisms;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-public class transfer {
+public class Transfer {
 
     private DcMotor transfer;
     //initiates intake motor
@@ -16,7 +16,7 @@ public class transfer {
         transfer.setPower(-1.0);
 //runs intake
 
-    } public void runTransferback() {
+    } public void runTransferBack() {
         transfer.setPower(1.0);
 //runs outake
 

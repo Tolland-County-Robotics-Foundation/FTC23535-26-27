@@ -1,23 +1,23 @@
 package org.firstinspires.ftc.teamcode.Autos.Blue.InitialScoring;
 
 import com.pedropathing.api.Paths;
+import com.pedropathing.api.PoseFactory;
+import com.pedropathing.follower.Follower;
 import com.pedropathing.math.Pose;
 import com.pedropathing.paths.Path;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
-import com.pedropathing.api.PoseFactory;
-import com.pedropathing.follower.Follower;
-
+import org.firstinspires.ftc.teamcode.mechanisms.Flywheel;
 import org.firstinspires.ftc.teamcode.mechanisms.Intake;
 //import org.firstinspires.ftc.teamcode.mechanisms.Transfer;
-import org.firstinspires.ftc.teamcode.mechanisms.Flywheel;
-//import org.firstinspires.ftc.teamcode.mechanisms.Limelight;
+import org.firstinspires.ftc.teamcode.mechanisms.Transfer;
 import org.firstinspires.ftc.teamcode.pedro.Constants;
 
 import com.pedropathing.ivy.Command;
 import com.pedropathing.ivy.Scheduler;
 
+import static com.pedropathing.api.Paths.*;
 import static com.pedropathing.ivy.Scheduler.schedule;
 import static com.pedropathing.ivy.commands.Commands.waitMs;
 import static com.pedropathing.ivy.groups.Groups.sequential;
@@ -26,12 +26,13 @@ import static com.pedropathing.ivy.pedro.PedroCommands.follow;
 @Autonomous
 public class BlueAllianceAuto1 extends OpMode {
     Intake intake = new Intake();
+    Transfer transfer = new Transfer();
     Flywheel flywheel = new Flywheel();
     private Follower follower;
     private final PoseFactory p = PoseFactory.degrees();
 
     private final Pose start = p.of(82.5, 133, 90);
-    private final Pose path1 = p.of(82.4337, 105, 270);
+    private final Pose point1 = p.of(82.4337, 105, 270);
     private final Pose point2Start = p.of(82.4337, 105, 30);
     private final Pose point2 = p.of(133.0765, 129, 90);
     private final Pose point3 = p.of(82.5827, 34.651, 90);
@@ -42,7 +43,7 @@ public class BlueAllianceAuto1 extends OpMode {
     private final Pose point5 = p.of(128.8245, 43.9673, 44.9866);
 
     public Path path1() {
-        return Paths.line(start, path1).constant(path1);
+        return Paths.line(start, point1).constant(90);
     }
 
     public Path path2() {
@@ -50,7 +51,7 @@ public class BlueAllianceAuto1 extends OpMode {
     }
 
     public Path path3() {
-        return Paths.curve(point2, point3Control1, point3Control2, point3).linear(point2, point3);
+        return Paths.curve(point2, point3Control1, point3Control2, point3).linear(90, 270);
     }
 
     public Path path4() {
@@ -84,6 +85,7 @@ public class BlueAllianceAuto1 extends OpMode {
         follower.setPose(start);
         follower.update();
 
+        // Create path objects ONCE in init()
         intake.init(hardwareMap);
         flywheel.init(hardwareMap);
     }
@@ -98,24 +100,22 @@ public class BlueAllianceAuto1 extends OpMode {
         follower.update();
         Scheduler.execute();
 
-        //shooter
-        //limelight
-        //Intake
-        if (follower.currentPath() == path2() && !follower.isBusy())  {
+        // Intake control
+        if (follower.currentPath() == path2() || follower.currentPath() == path4()) {
             intake.runIntake();
-        } else if (follower.currentPath() == path4() && !follower.isBusy()) {
-            intake.runIntake();
-        } else {
-            intake.stopIntake();
         }
-
-        if (follower.currentPath() == path1() && !follower.isBusy()) {
-            flywheel.runflywheel();
+        else if (follower.currentPath() == path1() && !follower.isBusy()) {
+            transfer.runTransfer();
+            flywheel.runflywheelwithcamerablue();
+            transfer.stopTransfer();
         }
         else if (follower.currentPath() == path3() && !follower.isBusy()) {
-            flywheel.runflywheel();
-        }
-        else {
+            transfer.runTransfer();
+            flywheel.runflywheelwithcamerablue();
+            transfer.stopTransfer();
+        } else {
+            intake.runIntake();
+            transfer.runTransferBack();
             flywheel.stopflywheel();
         }
         //transfer
