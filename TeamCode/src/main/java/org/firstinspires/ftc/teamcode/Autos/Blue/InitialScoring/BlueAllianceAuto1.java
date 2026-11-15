@@ -101,24 +101,31 @@ public class BlueAllianceAuto1 extends OpMode {
         Scheduler.execute();
 
         // Intake control
-        if (follower.currentPath() == path2() || follower.currentPath() == path4()) {
+        if (follower.currentPath() == path2() && !follower.isBusy()|| follower.currentPath() == path4() && !follower.isBusy()) {
             intake.runIntake();
         }
         else if (follower.currentPath() == path1() && !follower.isBusy()) {
-            transfer.runTransfer();
             flywheel.runflywheelwithcamerablue();
-            transfer.stopTransfer();
+            if (flywheel.target > 0 && Math.abs(flywheel.RPM - flywheel.target) <= 100) {
+                transfer.runTransfer();
+            }
+            else {
+                transfer.stopTransfer();
+            }
         }
         else if (follower.currentPath() == path3() && !follower.isBusy()) {
-            transfer.runTransfer();
             flywheel.runflywheelwithcamerablue();
-            transfer.stopTransfer();
+            if (flywheel.target > 0 && Math.abs(flywheel.RPM - flywheel.target) <= 100) {
+                transfer.runTransfer();
+            }
+            else {
+                transfer.stopTransfer();
+            }
         } else {
             intake.runIntake();
             transfer.runTransferBack();
             flywheel.stopflywheel();
         }
-        //transfer
 
         //telemetry
         telemetry.addData("X", follower.pose().x());
