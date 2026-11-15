@@ -69,11 +69,11 @@ public class RedAllianceAuto1 extends OpMode {
     public Command autoRoutine() {
         return sequential(
                 follow(follower, path1()),
-                waitMs(3000),
+                waitMs(3500),
                 follow(follower, path2()),
                 waitMs(2000),
                 follow(follower, path3()),
-                waitMs(3000),
+                waitMs(3500),
                 follow(follower, path4()),
                 waitMs(5000),
                 follow(follower, path5())
@@ -108,15 +108,25 @@ public class RedAllianceAuto1 extends OpMode {
             intake.runIntake();
         }
         else if (follower.currentPath() == path1() && !follower.isBusy()) {
-            transfer.runTransfer();
             flywheel.runflywheelwithcamerared();
+            if (flywheel.target > 0 && Math.abs(flywheel.RPM - flywheel.target) <= 100) {
+                transfer.runTransfer();
+            }
+            else {
+                transfer.stopTransfer();
+            }
         }
         else if (follower.currentPath() == path4() && !follower.isBusy()) {
             intake.runIntake();
         }
         else if (follower.currentPath() == path3() && !follower.isBusy()) {
-            transfer.runTransfer();
-            flywheel.runflywheelwithcamerared();
+            flywheel.runflywheelwithcamerablue();
+            if (flywheel.target > 0 && Math.abs(flywheel.RPM - flywheel.target) <= 100) {
+                transfer.runTransfer();
+            }
+            else {
+                transfer.stopTransfer();
+            }
         }
         else {
             intake.runIntake();

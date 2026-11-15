@@ -66,11 +66,11 @@ public class BlueAllianceAuto1 extends OpMode {
     private Command autoRoutine() {
         return sequential(
                 follow(follower, path1()),
-                waitMs(3000),
+                waitMs(3500),
                 follow(follower, path2()),
                 waitMs(2000),
                 follow(follower, path3()),
-                waitMs(3000),
+                waitMs(3500),
                 follow(follower, path4()),
                 waitMs(5000),
                 follow(follower, path5())
