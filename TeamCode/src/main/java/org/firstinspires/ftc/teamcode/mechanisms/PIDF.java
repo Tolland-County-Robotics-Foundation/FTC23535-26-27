@@ -43,6 +43,7 @@ public class PIDF {
         integralsum = 0;
         previouserror = 0;
         deltatime = 0.0001;
+        timer.reset();
     }
 
 }

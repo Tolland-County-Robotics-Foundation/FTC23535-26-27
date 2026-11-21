@@ -13,11 +13,11 @@ public class Intake {
     }
 //intiates code
    public void runIntake() {
-        intake.setPower(1.0);
+        intake.setPower(-1.0);
 //runs intake
 
     } public void runOuttake() {
-        intake.setPower(-1.0);
+        intake.setPower(1.0);
 //runs outake
 
 

@@ -13,11 +13,11 @@ public class transfer {
     }
     //intiates code
     public void runTransfer() {
-        transfer.setPower(1.0);
+        transfer.setPower(-1.0);
 //runs intake
 
     } public void runTransferback() {
-        transfer.setPower(-1.0);
+        transfer.setPower(1.0);
 //runs outake
 
 
