@@ -42,7 +42,7 @@ public class Flywheel {
         double distance = limelightShooting.getDistanceFromTage(teamcolor);
 
         if (distance > 0) {
-            target = 670.04 * Math.log(distance) - 928.24;
+            target = 1785 * Math.exp(2.58e-3 * distance);
         }
 
         RPM = flywheel.getVelocity() * (60.0/28.0);
@@ -56,6 +56,10 @@ public class Flywheel {
     public void stopflywheel(){
         flywheel.setPower(0);
         pidf.Reset();
+    }
+
+    public void reverse(){
+        flywheel.setPower(-1);
     }
 }
 

@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 @Config
 public class AutoAlign {
 
-    public static double kp = -0.1;
+    public static double kp = -0.05;
     public static double ki = 0;
     public static double kd = 0;
     public static double ks = 0;

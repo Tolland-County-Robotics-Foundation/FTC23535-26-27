@@ -86,6 +86,7 @@ public class Launcher_TestV2 extends LinearOpMode {
             telemetry.addData("Distance", limelightShooting.getDistanceFromTage(teamcolor));
             telemetry.addData("rpm", flywheel.flywheel.getVelocity() * (60.0/28.0));
             telemetry.addData("our RPM %", RPM);
+            telemetry.setMsTransmissionInterval(50);
             telemetry.update();
         }
     }}

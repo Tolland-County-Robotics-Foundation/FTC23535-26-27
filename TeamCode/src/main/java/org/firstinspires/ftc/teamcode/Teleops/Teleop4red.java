@@ -49,29 +49,34 @@ public class Teleop4red extends LinearOpMode {
         while (opModeIsActive()) {
 
 
-            if (gamepad1.right_bumper) {
+
+            if (gamepad2.right_bumper) {
                 intake.runOuttake();
                 Transfer.runTransferback();
-            } else if (gamepad1.left_bumper) {
+            } else if (gamepad2.left_bumper) {
                 intake.runIntake();
             } else {
                 intake.stopIntake();
             }
 
-            if(gamepad1.left_trigger > 0.2){
+            if(gamepad2.left_trigger > 0.2){
                 flywheel.runflywheelwithcamera(teamcolor);
                 autoAlign.Align(teamcolor);
+            } else if (gamepad2.right_trigger > 0.2){
+                flywheel.reverse();
             } else {
                 flywheel.stopflywheel();
                 autoAlign.stopAlign();
             }
 
             //Only runs transfer when RPM is within range
-            if (gamepad1.left_trigger > 0.2 && Math.abs(flywheel.RPM - flywheel.target) <= 100) {
+            if (gamepad2.left_trigger > 0.2 && Math.abs(flywheel.RPM - flywheel.target) <= 100) {
                 Transfer.runTransfer();
             } else {
                 Transfer.stopTransfer();
             }
+
+
 
             //runs our movement method with our gamepad parameters
             drivetrain.Drive(gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
@@ -83,6 +88,7 @@ public class Teleop4red extends LinearOpMode {
             telemetry.addData("trigger",gamepad1.left_trigger);
             telemetry.addData("rpm", flywheel.RPM);
             telemetry.addData("power %", flywheel.flywheel.getPower() * 100);
+            telemetry.setMsTransmissionInterval(50);
             telemetry.update();
         }
     }
