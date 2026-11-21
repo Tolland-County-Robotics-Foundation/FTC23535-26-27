@@ -10,6 +10,7 @@ public class Intake {
     public void init(HardwareMap hardwareMap) {
         intake = hardwareMap.get(DcMotor.class, "intake");
         intake.setDirection(DcMotor.Direction.FORWARD);
+
     }
 //intiates code
    public void runIntake() {

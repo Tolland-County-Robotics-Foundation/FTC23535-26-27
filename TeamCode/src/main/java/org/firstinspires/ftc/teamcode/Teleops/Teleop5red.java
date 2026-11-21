@@ -1,0 +1,97 @@
+/* This is the base Teleop program for mecanum drive.
+ */
+package org.firstinspires.ftc.teamcode.Teleops;
+
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+
+import org.firstinspires.ftc.teamcode.mechanisms.AutoAlign;
+import org.firstinspires.ftc.teamcode.mechanisms.Flywheel;
+import org.firstinspires.ftc.teamcode.mechanisms.Hood;
+import org.firstinspires.ftc.teamcode.mechanisms.Intake;
+import org.firstinspires.ftc.teamcode.mechanisms.MechanumDrive;
+import org.firstinspires.ftc.teamcode.mechanisms.limelightShooting;
+import org.firstinspires.ftc.teamcode.mechanisms.transfer;
+
+@TeleOp(name="FieldCentricTeleOp5 for blue", group="Linear OpMode")
+public class Teleop5red extends LinearOpMode {
+
+    AutoAlign autoAlign = new AutoAlign();
+
+    MechanumDrive drivetrain = new MechanumDrive();
+
+    Flywheel flywheel = new Flywheel();
+
+    transfer Transfer = new transfer();
+
+    Intake intake = new Intake();
+
+    limelightShooting limelightShooting = new limelightShooting();
+
+    Hood hood = new Hood();
+
+    String teamcolor = "red";
+
+    @Override
+    public void runOpMode() {
+        //Initializes the motors in our Method aka function
+        drivetrain.init(hardwareMap, 2);
+
+        intake.init(hardwareMap);
+
+        Transfer.init(hardwareMap);
+
+        flywheel.init(hardwareMap);
+
+        limelightShooting.init(hardwareMap);
+
+        autoAlign.init(hardwareMap);
+
+        hood.init(hardwareMap);
+        waitForStart();
+
+        while (opModeIsActive()) {
+
+
+            if (gamepad2.right_bumper) {
+                intake.runOuttake();
+                Transfer.runTransferback();
+            } else if (gamepad2.left_bumper) {
+                intake.runIntake();
+            } else {
+                intake.stopIntake();
+            }
+
+            if(gamepad2.left_trigger > 0.2){
+                flywheel.runflywheelwithcamera(teamcolor);
+                autoAlign.Align(teamcolor);
+                hood.aimhood(teamcolor);
+            } else if (gamepad2.right_trigger > 0.2){
+                flywheel.reverse();
+            } else {
+                flywheel.stopflywheel();
+                autoAlign.stopAlign();
+            }
+
+            //Only runs transfer when RPM is within range
+            if (gamepad2.left_trigger > 0.2 && Math.abs(flywheel.RPM - flywheel.target) <= 100) {
+                Transfer.runTransfer();
+            } else {
+                Transfer.stopTransfer();
+            }
+
+            //runs our movement method with our gamepad parameters
+            drivetrain.Drive(gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
+
+
+
+            telemetry.addData("Distance", limelightShooting.getDistanceFromTage(teamcolor));
+            telemetry.addData("target", flywheel.target);
+            telemetry.addData("trigger",gamepad1.left_trigger);
+            telemetry.addData("rpm", flywheel.RPM);
+            telemetry.addData("power %", flywheel.flywheel.getPower() * 100);
+            telemetry.setMsTransmissionInterval(50);
+            telemetry.update();
+        }
+    }
+}
