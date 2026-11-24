@@ -8,9 +8,9 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.mechanisms.AutoAlign;
 import org.firstinspires.ftc.teamcode.mechanisms.Flywheel;
 import org.firstinspires.ftc.teamcode.mechanisms.Intake;
-import org.firstinspires.ftc.teamcode.mechanisms.MechanumDrive;
+import org.firstinspires.ftc.teamcode.mechanisms.MecanumDrive;
+import org.firstinspires.ftc.teamcode.mechanisms.Transfer;
 import org.firstinspires.ftc.teamcode.mechanisms.limelightShooting;
-import org.firstinspires.ftc.teamcode.mechanisms.transfer;
 import org.firstinspires.ftc.teamcode.mechanisms.AutoAlign;
 
 @TeleOp(name="FieldCentricTeleOp4 for blue", group="Linear OpMode")
@@ -18,11 +18,11 @@ public class Teleop4blue extends LinearOpMode {
 
     AutoAlign autoAlign = new AutoAlign();
 
-    MechanumDrive drivetrain = new MechanumDrive();
+    MecanumDrive drivetrain = new MecanumDrive();
 
     Flywheel flywheel = new Flywheel();
 
-    transfer Transfer = new transfer();
+    Transfer Transfer = new Transfer();
 
     Intake intake = new Intake();
 
@@ -51,7 +51,7 @@ public class Teleop4blue extends LinearOpMode {
 
             if (gamepad1.right_bumper) {
                 intake.runOuttake();
-                Transfer.runTransferback();
+                Transfer.runTransferBack();
             } else if (gamepad1.left_bumper) {
                 intake.runIntake();
             } else {
@@ -59,7 +59,7 @@ public class Teleop4blue extends LinearOpMode {
             }
 
             if(gamepad1.left_trigger > 0.2){
-                flywheel.runflywheelwithcamera(teamcolor);
+                flywheel.runflywheelwithcamerablue();
                 autoAlign.Align(teamcolor);
             } else {
                 flywheel.stopflywheel();
